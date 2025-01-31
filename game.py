@@ -58,9 +58,11 @@ font = pygame.font.Font('freesansbold.ttf', 35)
 textX = 10
 textY = 10
 
+
 # Game over text
 over_font = pygame.font.Font('freesansbold.ttf', 66)
 restart_font = pygame.font.Font('freesansbold.ttf', 20)
+quit_font = pygame.font.Font('freesansbold.ttf', 20)
 
 game_over = False
 
@@ -68,13 +70,24 @@ def game_over_():
     global game_over
     over_text = over_font.render("GAME OVER", True, (255, 255, 255))
     screen.blit(over_text, (200, 250))
-    restart_text = restart_font.render(".", True, (255, 255, 255))
+    restart_text = restart_font.render("restart", True, (255, 255, 255))
     screen.blit(restart_text, (280, 350))
+    quit_text = restart_font.render("quit", True, (255, 255, 255))
+    screen.blit(quit_text, (450, 350))
     game_over = True
 
 
 def show_score(x , y):
     score = font.render("Score : " + str(score_value),True, (255 , 255, 255))
+    screen.blit(score,(x,y))
+
+def show_high_score(x , y):
+    highscore_value = 0
+    if highscore_value <score_value:
+        highscore_value=score_value
+    else:
+        highscore_value=highscore_value
+    score = font.render("high Score : " + str(highscore_value),True, (255 , 255, 255))
     screen.blit(score,(x,y))
 
 def player(x, y):
@@ -188,5 +201,5 @@ while running:
     iscollusion(bulletY, bulletX, enemy1X[i], enemy1Y[i])
     player(playerX, playerY)
     show_score(textX,textY)
+    show_high_score(550,10)
     pygame.display.update()
-    
